@@ -21,5 +21,5 @@ public interface IUser {
     
     int save(User user);
     
-    boolean delete(int id);
+    boolean deleteById(int id);
 }

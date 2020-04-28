@@ -8,14 +8,15 @@ import javax.persistence.Persistence;
 
 // DAO uses JDBC(no JPA) or EntityManager(with JPA)
 public class UserDaoImpl implements IUserDao {
+
     private EntityManagerFactory emf;
     private EntityManager em;
-    
-    public UserDaoImpl(){
-        emf = Persistence.createEntityManagerFactory("PersistentUserPU");  
-        em = emf.createEntityManager();  
+
+    public UserDaoImpl() {
+        emf = Persistence.createEntityManagerFactory("PersistentUserPU");
+        em = emf.createEntityManager();
     }
-    
+
     @Override
     public User findById(int id) {
         return em.find(User.class, id);
@@ -29,16 +30,38 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public boolean update(int id, User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        User oldUser = em.find(User.class, id);
+        if (oldUser != null) {
+            em.getTransaction().begin();
+            oldUser.setFirstName(user.getFirstName());
+            oldUser.setLastName(user.getLastName());
+            oldUser.setTel(user.getTel());
+            oldUser.setEmail(user.getEmail());
+            em.getTransaction().commit();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public int save(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.getTransaction().begin();
+        em.persist(user);
+        em.getTransaction().commit();
+        return 1;
     }
 
     @Override
-    public boolean delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean deleteById(int id) {
+        em.getTransaction().begin();
+        User user = em.find(User.class, id);
+        if (user != null) {
+            em.remove(user);
+            em.getTransaction().commit();
+            return true;
+        } else {
+            return false;
+        }
     }
 }

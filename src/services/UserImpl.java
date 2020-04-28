@@ -29,17 +29,29 @@ public class UserImpl implements IUser {
 
     @Override
     public boolean update(int id, User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (id <= 0 || user == null) {
+            return false;
+        } else {
+            return userDao.update(id, user);
+        }
     }
 
     @Override
     public int save(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (user == null){
+            return 0;
+        }
+        else {
+            return userDao.save(user);
+        }
     }
 
     @Override
-    public boolean delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean deleteById(int id) {
+        if (id <= 0) {
+            return false;
+        } else {
+            return userDao.deleteById(id);
+        }
     }
-
 }

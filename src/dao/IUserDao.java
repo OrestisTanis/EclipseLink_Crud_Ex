@@ -21,5 +21,5 @@ public interface IUserDao {
     
     int save(User user);
     
-    boolean delete(int id);
+    boolean deleteById(int id);
 }
