@@ -17,7 +17,7 @@ public interface IUserDao {
     
     List<User> findAll();
     
-    boolean update(int id, User user);
+    boolean updateById(int id, User user);
     
     int save(User user);
     

@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-// DAO uses JDBC(no JPA) or EntityManager(with JPA)
+// DAO uses JDBC-SQL statements(no JPA) or EntityManager(with JPA)
 public class UserDaoImpl implements IUserDao {
 
     private EntityManagerFactory emf;
@@ -29,7 +29,7 @@ public class UserDaoImpl implements IUserDao {
     }
 
     @Override
-    public boolean update(int id, User user) {
+    public boolean updateById(int id, User user) {
         User oldUser = em.find(User.class, id);
         if (oldUser != null) {
             em.getTransaction().begin();

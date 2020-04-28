@@ -53,7 +53,7 @@ public class PersistentUser {
         
         // Update
         User updatedUser = new User("Brad", "Bellick", "0987654321", "bellick@yahoo.us");
-        userService.update(2, updatedUser);
+        userService.updateById(2, updatedUser);
         
         // Delete
         int i = 1;

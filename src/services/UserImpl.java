@@ -28,11 +28,11 @@ public class UserImpl implements IUser {
     }
 
     @Override
-    public boolean update(int id, User user) {
+    public boolean updateById(int id, User user) {
         if (id <= 0 || user == null) {
             return false;
         } else {
-            return userDao.update(id, user);
+            return userDao.updateById(id, user);
         }
     }
 
